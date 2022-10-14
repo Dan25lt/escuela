@@ -1,0 +1,83 @@
+<html>
+
+<head>
+  <title>Escuela primaria 15 de mayo</title>
+  <link rel="shortcut icon" type="image/x-icon" href="./img/school.ico" />
+  <link rel="stylesheet" href="css/menu.css" type="text/css" />
+  <link rel="stylesheet" href="css/mi_hoja_de_estilos.css" type="text/css" />
+  <div class="header">
+    <img src="img/login-logo.jpg" width="100" height="100" alt="logo">
+    <h1>Escuela Pirmaria 15 de mayo</h1>
+    <h2>Bienvenido</h2>
+  </div>
+</head>
+
+<body>
+
+  <div id="myNav" class="overlay">
+
+    <!-- Boton para borrar el menu -->
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <!-- Contenido -->
+    <div class="overlay-content">
+      <a href="index.html">Pagina Principal</a>
+      <a href="quienessomos.html">Quienes Somos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="Solicitudes.html">Inscripciones</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+
+  </div>
+
+  <!-- Precionar sobre el menu -->
+  <div class="menu">
+    <span class="menu" onclick="openNav()">Menu</span>
+  </div>
+  <div class="centrar">
+    <h1>Inscripciones</h1>
+    <form id="Incripcion">
+      <label for="nombre">Nombre:</label><br>
+      <input type="text" id="nombre" name="nombre"><br>
+      <label for="apellidoPaterno">Apellido paterno:</label><br>
+      <input type="text" id="apellidoPaterno" name="apellidoPaterno"><br>
+      <label for="apellidoMaterno">Apellido Materno:</label><br>
+      <input type="text" id="apellidoMaterno" name="apellidoMaterno"><br>
+      <label for="CURP">CURP:</label><br>
+      <input type="text" id="CURP" name="CURP"><br>
+      <label for="fechaNacimiento">Fecha de nacimiento:</label><br>
+      <input type="date" id="fechaNacimiento" name="fechaNacimiento"><br>
+      <label for="EstadoRepublica">Estado de la república:</label><br>
+      <input type="text" id="EstadoRepublica" name="EstadoRepublica"><br>
+      <label for="gradoEscolar">Grado escolar al que desea inscribirse:</label><br>
+      <input type="number" id="gradoEscolar" name="gradoEscolar"><br>
+      <label for="telefono">Teléfono de contacto:</label><br>
+      <input type="tel" id="telefono" name="telefono"><br>
+      <label for="email">Correo electrónico:</label><br>
+      <input type="email" id="email" name="email"><br>
+
+        <input class="btn-group" type="button" onclick="Guardar()" value="Guardar">
+        <input class="btn-group" type="button" onclick="window.location.reload()" value="Cancelar">
+
+    </form>
+    <script>
+      function myFunction() {
+        document.getElementById("Incripcion").submit();
+      }
+    </script>
+  </div>
+</body>
+<script>
+  function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+  }
+
+  function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+  }</script>
+
+<div id="footer">
+  <footer>Francisco Daniel Pinon Reza PW1 &nbsp &nbsp </footer>
+</div>
+
+</html>

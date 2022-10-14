@@ -1,0 +1,91 @@
+html>
+
+<head>
+  <title>Escuela primaria 15 de mayo</title>
+  <link rel="shortcut icon" type="image/x-icon" href="./img/school.ico" />
+  <link rel="stylesheet" href="css/menu.css" type="text/css" />
+  <link rel="stylesheet" href="css/servicios.css" type="text/css" />
+  <div class="header">
+    <img src="img/login-logo.jpg" width="100" height="100" alt="logo">
+    <h1>Escuela Pirmaria 15 de mayo</h1>
+    <h2>Bienvenido</h2>
+  </div>
+</head>
+
+<body>
+  <div id="myNav" class="overlay">
+
+    <!-- Boton para borrar el menu -->
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <!-- Contenido -->
+    <div class="overlay-content">
+      <a href="index.html">Pagina Principal</a>
+      <a href="quienessomos.html">Quienes Somos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="Solicitudes.html">Inscripciones</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+
+  </div>
+
+  <!-- Precionar sobre el menu -->
+  <div class="menu">
+    <span class="menu" onclick="openNav()">Menu</span>
+  </div>
+  <div class="centrar_texto">
+<h1>Servicios ofrecidos</h1>
+<table >
+  <tr>
+    <td><strong>Servicio</strong> </td>
+    <td><strong>Descripcion</strong> </td>
+    <td><strong>Imagen</strong> </td>
+  </tr>
+  <tr>
+    <td>Comedor</td>
+    <td>Comida balanceado para todos los alumnos</td>
+    <td><img src="img/comedor.jpg" width="200px" alt="comedor"></td>
+  </tr>
+  <tr>
+    <td>Tiempo extendido</td>
+    <td>Horario extra de 3 hrs. con clases adicionales</td>
+    <td><img src="img/horario_extendido.jpg" width="200px" pxalt="horario_extendido"></td>
+  </tr>
+  <tr>
+    <td>Transporte</td>
+    <td>Rutas especializadas para que los alumnos lleguen sanos a sus hogares</td>
+    <td><img src="img/transporte.jpg" width="200px" alt="transporte"></td>
+  </tr>
+  <tr>
+    <td>Estacionamiento visitas</td>
+    <td>Amplio estacionamiento para todos los padres de familia</td>
+    <td><img src="img/estacionamiento.jpg" width="200px" alt="estacionamiento"></td>
+  </tr>
+  <tr>
+    <td>Caseta de seguridad</td>
+    <td>Acceso controlado para alumnos y personal</td>
+    <td><img src="img/caseta.jpg" width="200px" alt="caseta"></td>
+  </tr>
+  <tr>
+    <td>Ingles</td>
+    <td>Clases especializadas de ingles por niveles</td>
+    <td><img src="img/ingles.jpg" width="200px" alt="ingles"></td>
+  </tr>
+</table>
+
+  </div>
+</body>
+<script>
+  function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+  }
+
+  function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+  }</script>
+</body>
+<div id="footer">
+  <footer>Francisco Daniel Pinon Reza PW1 &nbsp &nbsp </footer>
+</div>
+
+</html>
