@@ -12,7 +12,8 @@
     <h1>Escuela Primaria 15 de mayo</h1>
     <h2>Seleccione la opcion deseada</h2>
 
-    <button class="button btn:hover espaciador" onclick="redireccionalpadrefamilia()" style="width:auto;"> Soy padre de familia</button>
+    <button class="button btn:hover espaciador" onclick="redireccionalpadrefamilia()" style="width:auto;"> Soy padre de
+        familia</button>
     <button class="button btn:hover espaciador" onclick="document.getElementById('id01').style.display='block'"
         style="width:auto;">Iniciar Sesion</button>
 
@@ -20,7 +21,7 @@
 
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" onsubmit="login()" id="loginForm">
+        <form class="modal-content animate" id="loginForm">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close"
                     title="Close Modal">&times;</span>
@@ -57,7 +58,13 @@
         /*
         * Login de Usuario 
         */
-        function login() {
+
+        var form = document.getElementById("loginForm");
+        form.addEventListener('submit', handleLoginFormSubmit);
+
+        function handleLoginFormSubmit(event) {
+            event.preventDefault();
+
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
@@ -81,7 +88,7 @@
 
                         if (response.tipo_usuario == 'Administrador') {
                             location.replace("./admin.html");
-                        } 
+                        }
                     } else if (response.statusCode === 403) {
                         document.getElementById("loginResult").innerHTML = response.msj;
                     }
@@ -93,13 +100,13 @@
         * Se mete todo en una sola funcion y se corre
         */
         function userInterfaseInit() {
-            
+
             function redireccionalpadrefamilia() {
-                location.replace("./menu.html");   
+                location.replace("./menu.html");
             }
 
             // crear el modal
-            var modal = document.getElementById('id01'); 
+            var modal = document.getElementById('id01');
 
             // se cierra si se hace click fuera de la ventana
             window.onclick = function (event) {
@@ -111,16 +118,16 @@
 
 
         // Inicializar las funciones aqui despues del codigo
-        createCaptcha(); // Inicializar el captcha
         userInterfaseInit();
     </script>
     <script>
-    function redireccionalpadrefamilia() {
-        location.replace("./menu.html");
-    }
+        function redireccionalpadrefamilia() {
+            location.replace("./menu.html");
+        }
     </script>
 </body>
 <div id="footer">
-    <footer>Francisco Daniel Pinon Reza PW1 &nbsp  &nbsp  </footer>
-  </div>
+    <footer>Francisco Daniel Pinon Reza PW1 &nbsp &nbsp </footer>
+</div>
+
 </html>
