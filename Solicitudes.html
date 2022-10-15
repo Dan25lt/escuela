@@ -36,27 +36,27 @@
   </div>
   <div class="centrar">
     <h1>Inscripciones</h1>
-    <form id="Incripcion">
+    <form id="inscripcionForm" >
       <label for="nombre">Nombre:</label><br>
       <input type="text" id="nombre" name="nombre"><br>
-      <label for="apellidoPaterno">Apellido paterno:</label><br>
-      <input type="text" id="apellidoPaterno" name="apellidoPaterno"><br>
-      <label for="apellidoMaterno">Apellido Materno:</label><br>
-      <input type="text" id="apellidoMaterno" name="apellidoMaterno"><br>
-      <label for="CURP">CURP:</label><br>
-      <input type="text" id="CURP" name="CURP"><br>
-      <label for="fechaNacimiento">Fecha de nacimiento:</label><br>
-      <input type="date" id="fechaNacimiento" name="fechaNacimiento"><br>
-      <label for="EstadoRepublica">Estado de la república:</label><br>
-      <input type="text" id="EstadoRepublica" name="EstadoRepublica"><br>
-      <label for="gradoEscolar">Grado escolar al que desea inscribirse:</label><br>
-      <input type="number" id="gradoEscolar" name="gradoEscolar"><br>
+      <label for="apellido_paterno">Apellido paterno:</label><br>
+      <input type="text" id="apellido_paterno" name="apellido_paterno"><br>
+      <label for="apellido_materno">Apellido Materno:</label><br>
+      <input type="text" id="apellido_materno" name="apellido_materno"><br>
+      <label for="curp">CURP:</label><br>
+      <input type="text" id="curp" name="curp"><br>
+      <label for="fecha_nacimiento">Fecha de nacimiento:</label><br>
+      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"><br>
+      <label for="estado">Estado de la república:</label><br>
+      <input type="text" id="estado" name="estado"><br>
+      <label for="grado">Grado escolar al que desea inscribirse:</label><br>
+      <input type="number" id="grado" name="grado"><br>
       <label for="telefono">Teléfono de contacto:</label><br>
       <input type="tel" id="telefono" name="telefono"><br>
       <label for="email">Correo electrónico:</label><br>
       <input type="email" id="email" name="email"><br>
 
-        <input class="btn-group" type="button" onclick="Guardar()" value="Guardar">
+        <input class="btn-group" type="submit" value="Guardar">
         <input class="btn-group" type="button" onclick="window.location.reload()" value="Cancelar">
 
     </form>
@@ -79,5 +79,31 @@
 <div id="footer">
   <footer>Francisco Daniel Pinon Reza PW1 &nbsp &nbsp </footer>
 </div>
+<script>
+  var form = document.getElementById("inscripcionForm");
+  form.addEventListener('submit', handleEditForm);
 
+  function handleEditForm(event) {
+    event.preventDefault();
+
+    let inscripcionForm = new FormData(document.getElementById("inscripcionForm"));
+
+    fetch('./backend/addStudentInscritosById.php', {
+      method: 'POST',
+      body: inscripcionForm
+    })
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (respuesta) {
+        console.log(respuesta);
+        if (respuesta === 'Registro insertado') {
+          alert("Registro insertado");
+          window.location.reload();
+        } else {
+          alert("Error al insertar el registro");
+        }
+      });
+  }
+</script>
 </html>
