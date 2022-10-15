@@ -20,7 +20,7 @@
 
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" onsubmit="validateCaptcha()" id="loginForm">
+        <form class="modal-content animate" onsubmit="login()" id="loginForm">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close"
                     title="Close Modal">&times;</span>
@@ -35,13 +35,6 @@
                 <div class="form-group">
                     <label for="contraseña"><b>Contrasena</b></label>
                     <input type="password" placeholder="Escribe tu contrasena" name="password" id="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="captcha" id="captcha_msj" class="text-info"><b>Captcha</b></label>
-                    <div id="captcha">
-                    </div>
-                    <input type="text" name="securityCode" id="cpatchaTextBox" class="form-control"
-                        placeholder="Captcha">
                 </div>
                 <div class="form-group">
                     <p id="loginResult">
@@ -60,50 +53,6 @@
         </form>
     </div>
     <script>
-         /*
-        * CAPTCHA
-        */
-        var code; // variable para comparar el captcha
-        function createCaptcha() {
-            //Se borra el capcha anterior almacenado
-            document.getElementById('captcha').innerHTML = "";
-            var charsArray =
-                "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var lengthOtp = 6;
-            var captcha = [];
-            for (var i = 0; i < lengthOtp; i++) {
-                //no se aceptara que se repitan caracteres en el capcha
-                var index = Math.floor(Math.random() * charsArray.length + 1); //Se selleciona la siguiente letra del array
-                if (captcha.indexOf(charsArray[index]) == -1)
-                    captcha.push(charsArray[index]);
-                else i--;
-            }
-            var canv = document.createElement("canvas");
-            canv.id = "captcha";
-            canv.width = 100;
-            canv.height = 50;
-            var ctx = canv.getContext("2d");
-            ctx.font = "25px Georgia";
-            ctx.strokeText(captcha.join(""), 0, 30);
-            //Se alamacena capcha parap oder validarlo mas adelante
-            code = captcha.join("");
-            document.getElementById("captcha").appendChild(canv); // agrega el canvas al cuerpo 
-        }
-
-        /*
-        * VALIDAR CAPTCHA
-        */
-        function validateCaptcha() {
-            event.preventDefault();
-            if (document.getElementById("cpatchaTextBox").value == code) {
-                console.log("Exito validando el captcha");
-                login()
-
-            } else {
-                alert("Captcha Invalido. Vuelve a intentarlo.");
-                createCaptcha();
-            }
-        }
 
         /*
         * Login de Usuario 
@@ -131,7 +80,7 @@
                         // codigo para redireccionar,
 
                         if (response.tipo_usuario == 'Administrador') {
-                            location.replace("./menu.html");
+                            location.replace("./admin.html");
                         } 
                     } else if (response.statusCode === 403) {
                         document.getElementById("loginResult").innerHTML = response.msj;
@@ -165,9 +114,11 @@
         createCaptcha(); // Inicializar el captcha
         userInterfaseInit();
     </script>
-    <script>function redireccionalpadrefamilia() {
+    <script>
+    function redireccionalpadrefamilia() {
         location.replace("./menu.html");
-    }</script>
+    }
+    </script>
 </body>
 <div id="footer">
     <footer>Francisco Daniel Pinon Reza PW1 &nbsp  &nbsp  </footer>

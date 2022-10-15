@@ -1,0 +1,27 @@
+
+table,
+th,
+td {
+    border: solid 1px;
+    text-align: left;
+    border-collapse: collapse;
+    background-color: #F2F2F2;
+}
+
+.fila {
+    padding-bottom: 10px;
+}
+
+.info_box {
+    border: solid;
+    border-width: 2px;
+    border-color: #222;
+    background-color: #E7E9EB;
+    width: 100%;
+    height: 150px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+    ;
+}
