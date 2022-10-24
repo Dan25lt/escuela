@@ -3,8 +3,9 @@
 
     $return_data = array();
 
-    $idalumnos = $_POST['idalumnos'];
+    $idcliente = $_POST['idcliente'];
     $nombre = $_POST['nombre'];
+
     $apellido_paterno = $_POST['apellido_paterno'];
     $apellido_materno = $_POST['apellido_materno'];
     $fecha_nacimiento = $_POST['fecha_nacimiento'];
