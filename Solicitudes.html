@@ -44,15 +44,15 @@
       <label for="apellido_materno">Apellido Materno:</label><br><br>
       <input type="text" id="apellido_materno" name="apellido_materno"><br><br>
       <label for="curp">CURP:</label><br><br>
-      <input type="text" id="curp" name="curp"><br><br>
+      <input type="text" maxlength="18" id="curp" name="curp"><br><br>
       <label for="fecha_nacimiento">Fecha de nacimiento:</label><br><br>
       <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"><br><br>
       <label for="estado">Estado de la republica:</label><br><br>
       <input type="text" id="estado" name="estado"><br><br>
       <label for="grado">Grado escolar al que desea inscribirse:</label><br><br>
-      <input type="number" id="grado" name="grado"><br><br>
+      <input type="number" min="1" max="6" maxlength="1" id="grado" name="grado"><br><br>
       <label for="telefono">Telefono de contacto:</label><br><br>
-      <input type="tel" id="telefono" name="telefono"><br><br>
+      <input type="tel" id="telefono" maxlength="10" name="telefono"><br><br>
       <label for="email">Correo electronico:</label><br><br>
       <input type="email" id="email" name="email"><br><br>
 
@@ -97,12 +97,31 @@
       })
       .then(function (respuesta) {
         console.log(respuesta);
-        if (respuesta === 'Registro insertado') {
+       
+       if(respuesta === "El candidato no tiene la edad suficiente"){
+        console.log(respuesta);
+        alert("El candidato no tiene la edad suficiente");
+       }
+       else
+       {
+        if(respuesta === 'el año de inscripcion es no valido'){
+        alert("El grado de registro no es valido");
+       }
+       else{
+        if(respuesta === 'Registro Duplicado'){
+          alert("El alumno ya existe");
+        }
+        else{
+          if (respuesta === 'Registro insertado') {
           alert("Registro insertado");
           window.location.reload();
         } else {
           alert("Error al insertar el registro");
         }
+        }  
+       }   
+       }
+       
       });
   }
 </script>

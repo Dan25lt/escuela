@@ -66,40 +66,40 @@
         <input type="hidden" placeholder="" name="idalumnos" id="idalumnos" required>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Nombre</b></label>
-        <input type="text" placeholder="" name="nombre" id="nombre" required>
+        <label for="contraseña"><b>Nombre</b></label><br>
+        <input type="text" placeholder="" name="nombre" id="nombre" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Apellido Paterno</b></label>
-        <input type="text" placeholder="" name="apellido_paterno" id="apellido_paterno" required>
+        <label for="contraseña"><b>Apellido Paterno</b></label><br>
+        <input type="text" placeholder="" name="apellido_paterno" id="apellido_paterno" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Apellido Paterno</b></label>
-        <input type="text" placeholder="" name="apellido_materno" id="apellido_materno" required>
+        <label for="contraseña"><b>Apellido Materno</b></label><br>
+        <input type="text" placeholder="" name="apellido_materno" id="apellido_materno" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Fecha Nacimiento</b></label>
-        <input type="text" placeholder="" name="fecha_nacimiento" id="fecha_nacimiento" required>
+        <label for="contraseña"><b>CURP</b></label><br>
+        <input type="text" maxlength="18" placeholder="" name="curp" id="curp" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>C.U.R.P.</b></label>
-        <input type="text" placeholder="" name="curp" id="curp" required>
+        <label for="contraseña"><b>Fecha Nacimiento</b></label><br>
+        <input type="date" placeholder="" name="fecha_nacimiento" id="fecha_nacimiento" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Estado</b></label>
-        <input type="text" placeholder="" name="estado" id="estado" required>
+        <label for="contraseña"><b>Estado</b></label><br>
+        <input type="text" placeholder="" name="estado" id="estado" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Grado solicitado</b></label>
-        <input type="text" placeholder="" name="grado" id="grado" required>
+        <label for="contraseña"><b>Grado solicitado</b></label><br>
+        <input type="number" min="1" max="6" placeholder="" name="grado" id="grado" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Telefono</b></label>
-        <input type="text" placeholder="" name="telefono" id="telefono" required>
+        <label for="contraseña"><b>Telefono</b></label><br>
+        <input type="tel" placeholder="" name="telefono" id="telefono" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Correo electronico</b></label>
-        <input type="text" placeholder="" name="email" id="email" required>
+        <label for="contraseña"><b>Correo electronico</b></label><br>
+        <input type="email" placeholder="" name="email" id="email" required><br>
       </div>
 
       <button type="submit">Guardar</button>
@@ -371,12 +371,20 @@
       })
       .then(function (respuesta) {
         console.log(respuesta);
-        if (respuesta === 'Registro actualizado') {
+        if(respuesta === "El candidato no tiene la edad suficiente")
+        {
+          alert("El candidato no tiene la edad suficiente");
+        }
+        else
+        {
+          if (respuesta === 'Registro actualizado') {
           alert("Registro actualizado");
           window.location.reload();
         } else {
           alert("Error al actualizar el registro");
         }
+        }      
+      
       });
   }
 

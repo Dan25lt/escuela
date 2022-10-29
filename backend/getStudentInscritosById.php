@@ -20,7 +20,6 @@
             $rowObj->idalumnos = $row['idalumnos'];
             $rowObj->nombre = $row['nombre'];
             $rowObj->apellido_paterno = $row['apellido_paterno'];
-            $rowObj->apellido_paterno = $row['apellido_paterno'];
             $rowObj->apellido_materno = $row['apellido_materno'];
             $rowObj->fecha_nacimiento = $row['fecha_nacimiento'];
             $rowObj->curp = $row['curp'];

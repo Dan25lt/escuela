@@ -8,8 +8,7 @@
                 fecha_inscripcion,
                 grado,
                 estado
-            FROM alumnos
-            WHERE estatus_alumno = 'inscrito'";
+            FROM alumnos";
 
     $result = $con->query($query);
 
