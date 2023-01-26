@@ -7,7 +7,7 @@
 
     $return_data = array();
     
-    $query = "SELECT * FROM alumnos WHERE idalumnos = $id";
+    $query = "SELECT idalumnos,nombre,apellido_paterno,apellido_materno, curp, estado,grado,telefono, email, idusuarios,estatus_alumno, date_format(fecha_inscripcion, '%Y-%m-%d' ) as fecha_inscripcion , date_format(fecha_nacimiento, '%Y-%m-%d' ) as fecha_nacimiento FROM alumnos WHERE idalumnos = $id";
 
     $result = $con->query($query);
 
@@ -37,5 +37,3 @@
     } else {
         echo 'no hay alumnos'; 
     }
-
-?>

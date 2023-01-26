@@ -1,10 +1,13 @@
  <html>
 
 <head>
+  <meta charset="UTF-8"/>
   <title>Escuela primaria 15 de mayo</title>
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/school.ico" />
   <link rel="stylesheet" href="assets/css/menu.css" type="text/css" />
   <link rel="stylesheet" href="assets/css/mi_hoja_de_estilos.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/general.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/index.css" type="text/css" />
   <div class="header">
     <img src="assets/img/login-logo.jpg" width="100" height="100" alt="logo">
     <h1>Escuela Pirmaria 15 de mayo</h1>
@@ -21,7 +24,7 @@
 
     <!-- Contenido -->
     <div class="overlay-content">
-      <a href="index.html">Pagina Principal</a>
+      <a href="index.html">Página Principal</a>
       <a href="quienessomos.html">Quienes Somos</a>
       <a href="servicios.html">Servicios</a>
       <a href="Solicitudes.html">Inscripciones</a>
@@ -34,27 +37,29 @@
   <div class="menu">
     <span class="menu" onclick="openNav()">Menu</span>
   </div>
+
+  <!-- Muestra los campos para agregar una solicitud -->
   <div class="centrar">
     <h1>Inscripciones</h1>
     <form id="inscripcionForm" >
       <label for="nombre">Nombre:</label><br><br>
-      <input type="text" id="nombre" name="nombre"><br><br>
+      <input type="text" id="add_nombre" name="nombre"><br><br>
       <label for="apellido_paterno">Apellido paterno:</label><br><br>
-      <input type="text" id="apellido_paterno" name="apellido_paterno"><br><br>
+      <input type="text" id="add_apellido_paterno" name="apellido_paterno"><br><br>
       <label for="apellido_materno">Apellido Materno:</label><br><br>
-      <input type="text" id="apellido_materno" name="apellido_materno"><br><br>
+      <input type="text" id="add_apellido_materno" name="apellido_materno"><br><br>
       <label for="curp">CURP:</label><br><br>
-      <input type="text" maxlength="18" id="curp" name="curp"><br><br>
+      <input type="text" maxlength="18" id="add_curp" name="curp"><br><br>
       <label for="fecha_nacimiento">Fecha de nacimiento:</label><br><br>
-      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"><br><br>
-      <label for="estado">Estado de la republica:</label><br><br>
-      <input type="text" id="estado" name="estado"><br><br>
+      <input type="date" id="add_fecha_nacimiento" name="fecha_nacimiento"><br><br>
+      <label for="estado">Estado de la república:</label><br><br>
+      <input type="text" id="add_estado" name="estado"><br><br>
       <label for="grado">Grado escolar al que desea inscribirse:</label><br><br>
-      <input type="number" min="1" max="6" maxlength="1" id="grado" name="grado"><br><br>
+      <input type="number" min="1" max="6" maxlength="1" id="add_grado" name="grado"><br><br>
       <label for="telefono">Telefono de contacto:</label><br><br>
-      <input type="tel" id="telefono" maxlength="10" name="telefono"><br><br>
-      <label for="email">Correo electronico:</label><br><br>
-      <input type="email" id="email" name="email"><br><br>
+      <input type="tel" id="add_telefono" maxlength="10" name="telefono"><br><br>
+      <label for="email">Correo electrónico:</label><br><br>
+      <input type="email" id="add_email" name="email"><br><br>
 
         <input class="btn-group" type="submit" value="Guardar">
         <input class="btn-group" type="button" onclick="window.location.reload()" value="Cancelar">
@@ -66,63 +71,444 @@
       }
     </script>
   </div>
-</body>
-<script>
-  function openNav() {
-    document.getElementById("myNav").style.width = "100%";
-  }
+  <div style="margin-top: 50%;">
 
-  function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
-  }</script>
-
-<div id="footer">
-  <footer>Francisco Daniel Pinon Reza PW1 &nbsp &nbsp </footer>
-</div>
-<script>
-  var form = document.getElementById("inscripcionForm");
-  form.addEventListener('submit', handleEditForm);
-
-  function handleEditForm(event) {
-    event.preventDefault();
-
-    let inscripcionForm = new FormData(document.getElementById("inscripcionForm"));
-
-    fetch('./backend/addStudentInscritosById.php', {
-      method: 'POST',
-      body: inscripcionForm
-    })
-      .then(function (response) {
-        return response.text();
+    <h1>Consultar Inscripciones</h1>
+  <div class="centrar_tabla" id="tabla_alumnos"></div>
+  </div>
+  <script>
+    // se agregan a una variable todos los valores de la forma llamdada inscripcionForm al precionar el submit
+    var form = document.getElementById("inscripcionForm");
+    form.addEventListener('submit', handleEditForm);
+  
+    function handleEditForm(event) {
+      event.preventDefault();
+  
+      let inscripcionForm = new FormData(document.getElementById("inscripcionForm"));
+  // manda la informacion a php mediante el fetch y su metodo POST
+      fetch('./backend/addStudentInscritosById.php', {
+        method: 'POST',
+        body: inscripcionForm
       })
-      .then(function (respuesta) {
-        console.log(respuesta);
-       
-       if(respuesta === "El candidato no tiene la edad suficiente"){
-        console.log(respuesta);
-        alert("El candidato no tiene la edad suficiente");
-       }
-       else
-       {
-        if(respuesta === 'el año de inscripcion es no valido'){
-        alert("El grado de registro no es valido");
-       }
-       else{
-        if(respuesta === 'Registro Duplicado'){
-          alert("El alumno ya existe");
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (respuesta) {
+          console.log(respuesta);
+         
+         if(respuesta === "El candidato no tiene la edad suficiente"){
+          console.log(respuesta);
+          alert("El candidato no tiene la edad suficiente");
+         }
+         else
+         {
+          if(respuesta === 'el año de inscripcion es no valido'){
+          alert("El grado de registro no es valido");
+         }
+         else{
+          if(respuesta === 'Registro Duplicado'){
+            alert("El alumno ya existe");
+          }
+          else{
+            if (respuesta === 'Registro insertado') {
+            alert("Registro insertado");
+            window.location.reload();
+          } else {
+            alert("Error al insertar el registro");
+          }
+          }  
+         }   
+         }
+         
+        });
+    }
+  
+    function openNav() {
+      document.getElementById("myNav").style.width = "100%";
+    }
+  
+    function closeNav() {
+      document.getElementById("myNav").style.width = "0%";
+    }</script>
+  
+  <div id="footer">
+    <footer>Francisco Daniel Piñón Reza PW1 &nbsp &nbsp </footer>
+  </div>
+  
+  
+  <div id="modalEditar" class="modal">
+    <form class="modal-content animate" id="editModalForm">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('modalEditar').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
+      </div>
+  
+      <div class="container">
+        <div class="form-group">
+          <input type="hidden" placeholder="" name="idalumnos" id="idalumnos" required>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Nombre</b></label><br>
+          <input type="text" placeholder="" name="nombre" id="nombre" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Apellido Paterno</b></label><br>
+          <input type="text" placeholder="" name="apellido_paterno" id="apellido_paterno" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Apellido Materno</b></label><br>
+          <input type="text" placeholder="" name="apellido_materno" id="apellido_materno" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>CURP</b></label><br>
+          <input type="text" maxlength="18" placeholder="" name="curp" id="curp" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Fecha Nacimiento</b></label><br>
+          <input type="date" placeholder="" name="fecha_nacimiento" id="fecha_nacimiento" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Estado</b></label><br>
+          <input type="text" placeholder="" name="estado" id="estado" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Grado solicitado</b></label><br>
+          <input type="number" min="1" max="6" placeholder="" name="grado" id="grado" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Teléfono</b></label><br>
+          <input type="tel" placeholder="" name="telefono" id="telefono" required><br>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><b>Correo electrónico</b></label><br>
+          <input type="email" placeholder="" name="email" id="email" required><br>
+        </div>
+  
+        <button type="submit">Guardar</button>
+        <label>
+        </label>
+      </div>
+  
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('modalEditar').style.display='none'"
+          class="cancelbtn">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
+  
+  
+  <div id="modalVer" class="modal">
+    <form class="modal-content animate" id="verModalForm">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('modalVer').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
+      </div>
+  
+      <div class="container">
+  
+        <p> id: <strong><span id="ver_idalumnos"></span></strong></p>
+        <p> nombre: <strong><span id="ver_nombre"></span></strong></p>
+        <p> apellido paterno: <strong><span id="ver_apellido_paterno"></span></strong></p>
+        <p> apellido materno: <strong><span id="ver_apellido_materno"></span></strong></p>
+        <p> fecha nacimiento: <strong><span id="ver_fecha_nacimiento"></span></strong></p>
+        <p> curp: <strong><span id="ver_curp"></span></strong></p>
+        <p> estado: <strong><span id="ver_estado"></span></strong></p>
+        <p> grado: <strong><span id="ver_grado"></span></strong></p>
+        <p> telefono: <strong><span id="ver_telefono"></span></strong></p>
+        <p> email: <strong><span id="ver_email"></span></strong></p>
+        <p> fecha inscripcion: <strong><span id="ver_fecha_inscripcion"></span></strong></p>
+  
+        <label>
+        </label>
+      </div>
+  
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('modalVer').style.display='none'"
+          class="cancelbtn">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+    function cargarTodos() {
+  
+      let data = new FormData();
+      data.append('estatus', 'inscrito');
+  
+      fetch('./backend/getStudentsInscritos.php', {
+        method: 'GET',
+      })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (return_data) {
+          if (return_data == "no hay alumnos") {
+            alert("no hay alumnos");
+            return;
+          }
+  
+          var data = JSON.parse(return_data);
+  
+          var columnNames = [
+            "idalumnos",
+            "nombre_completo",
+            "email",
+            "fecha_inscripcion",
+            "grado",
+            "estado",
+            "opciones"
+          ];
+  
+          var table = document.createElement('table');
+  
+          // Titulos solamente
+          var tr = document.createElement('tr');
+  
+          var td = document.createElement('td');
+          var text = document.createTextNode('Id');
+          td.appendChild(text);
+          tr.appendChild(td);
+          var td = document.createElement('td');
+          var text = document.createTextNode('Nombre completo');
+          td.appendChild(text);
+          tr.appendChild(td);
+          td = document.createElement('td');
+          text = document.createTextNode('Correo electronico');
+          td.appendChild(text);
+          tr.appendChild(td);
+          td = document.createElement('td');
+          text = document.createTextNode('Fecha inscripcion');
+          td.appendChild(text);
+          tr.appendChild(td);
+          td = document.createElement('td');
+          text = document.createTextNode('Grado solicitado');
+          td.appendChild(text);
+          tr.appendChild(td);
+          td = document.createElement('td');
+          text = document.createTextNode('Estado');
+          td.appendChild(text);
+          tr.appendChild(td);
+          td = document.createElement('td');
+          text = document.createTextNode('Opciones');
+          td.appendChild(text);
+          tr.appendChild(td);
+          table.appendChild(tr);
+  
+  
+          // Lenado de la tabla 
+          for (var i = 0; i < data.length; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < columnNames.length; j++) {
+              var td = document.createElement('td');
+              if (columnNames[j] === 'opciones') {
+  
+                var btn = document.createElement('input');
+                btn.type = "button";
+                btn.className = "btnBorrar";
+                btn.value = "borrar";
+                btn.name = data[i]['idalumnos'];
+  
+                tr.appendChild(btn);
+  
+                var btn = document.createElement('input');
+                btn.type = "button";
+                btn.className = "btnEdit";
+                btn.value = "editar";
+                btn.name = data[i]['idalumnos'];
+  
+                tr.appendChild(btn);
+  
+                var btn = document.createElement('input');
+                btn.type = "button";
+                btn.className = "btnVer";
+                btn.value = "ver";
+                btn.name = data[i]['idalumnos'];
+  
+                tr.appendChild(btn);
+  
+              } else {
+                var text = document.createTextNode(data[i][columnNames[j]]);
+  
+                td.appendChild(text);
+                tr.appendChild(td);
+              }
+            }
+            table.appendChild(tr);
+          }
+          document.getElementById("tabla_alumnos").appendChild(table);
+  
+          const borrarBtns = document.getElementsByClassName('btnBorrar');
+  
+          for (const btnDelete of borrarBtns) {
+            btnDelete.addEventListener("click", e => {
+              console.log("borrar Id: ", e.target.name);
+              deleteById(e.target.name);
+            })
+          }
+  
+          const editBtns = document.getElementsByClassName('btnEdit');
+  
+          for (const btnEdit of editBtns) {
+            btnEdit.addEventListener("click", e => {
+              console.log("edit Id: ", e.target.name);
+              editById(e.target.name);
+            })
+          }
+  
+          const verBtns = document.getElementsByClassName('btnVer');
+  
+          for (const btnVer of verBtns) {
+            btnVer.addEventListener("click", e => {
+              console.log("ver Id: ", e.target.name);
+              verById(e.target.name);
+            })
+          }
+  
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+  
+  
+    }
+  
+    function deleteById(id) {
+      fetch('./backend/deleteStudent.php', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: id,
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
-        else{
-          if (respuesta === 'Registro insertado') {
-          alert("Registro insertado");
-          window.location.reload();
-        } else {
-          alert("Error al insertar el registro");
+      })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (respuesta) {
+          console.log(respuesta);
+          if (respuesta === "Registro eliminado") {
+  
+            window.location.reload();
+  
+          } else {
+            alert("se elimino el registro");
+          }
         }
-        }  
-       }   
-       }
-       
-      });
-  }
-</script>
+        );
+    }
+  
+    function editById(id) {
+  
+      document.getElementById('modalEditar').style.display = 'block';
+  
+  
+      fetch('./backend/getStudentInscritosById.php', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: id,
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (respuesta) {
+          respuesta = JSON.parse(respuesta);
+  
+          console.log(respuesta);
+  
+          document.getElementById("idalumnos").value = respuesta[0]['idalumnos'];
+          document.getElementById("nombre").value = respuesta[0]['nombre'];
+          document.getElementById("apellido_paterno").value = respuesta[0]['apellido_paterno'];
+          document.getElementById("apellido_materno").value = respuesta[0]['apellido_materno'];
+          document.getElementById("fecha_nacimiento").value = respuesta[0]['fecha_nacimiento'];
+          document.getElementById("curp").value = respuesta[0]['curp'];
+          document.getElementById("estado").value = respuesta[0]['estado'];
+          document.getElementById("grado").value = respuesta[0]['grado'];
+          document.getElementById("telefono").value = respuesta[0]['telefono'];
+          document.getElementById("email").value = respuesta[0]['email'];
+  
+        });
+    }
+  
+    var form = document.getElementById("editModalForm");
+    form.addEventListener('submit', handleEditForm);
+  
+    function handleEditForm(event) {
+      event.preventDefault();
+      let editModalForm = new FormData(document.getElementById("editModalForm"));
+  
+      fetch('./backend/editStudentInscritosById.php', {
+        method: 'POST',
+        body: editModalForm
+      })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (respuesta) {
+          console.log(respuesta);
+          if(respuesta === "El candidato no tiene la edad suficiente")
+          {
+            alert("El candidato no tiene la edad suficiente");
+          }
+          else
+          {
+            if (respuesta === 'Registro actualizado') {
+            alert("Registro actualizado");
+            window.location.reload();
+          } else {
+            alert("Error al actualizar el registro");
+          }
+          }      
+        
+        });
+    }
+  
+    function verById(id) {
+      document.getElementById('modalVer').style.display = 'block';
+  
+  
+      fetch('./backend/getStudentInscritosById.php', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: id,
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (respuesta) {
+          respuesta = JSON.parse(respuesta);
+          console.log(respuesta)
+  
+          document.getElementById("ver_idalumnos").innerHTML = respuesta[0]['idalumnos'];
+          document.getElementById("ver_nombre").innerHTML = respuesta[0]['nombre'];
+          document.getElementById("ver_apellido_paterno").innerHTML = respuesta[0]['apellido_paterno'];
+          document.getElementById("ver_apellido_materno").innerHTML = respuesta[0]['apellido_materno'];
+          document.getElementById("ver_fecha_nacimiento").innerHTML = respuesta[0]['fecha_nacimiento'];
+          document.getElementById("ver_curp").innerHTML = respuesta[0]['curp'];
+          document.getElementById("ver_estado").innerHTML = respuesta[0]['estado'];
+          document.getElementById("ver_grado").innerHTML = respuesta[0]['grado'];
+          document.getElementById("ver_telefono").innerHTML = respuesta[0]['telefono'];
+          document.getElementById("ver_email").innerHTML = respuesta[0]['email'];
+          document.getElementById("ver_fecha_inscripcion").innerHTML = respuesta[0]['fecha_inscripcion'];
+  
+        });
+    }
+  
+    cargarTodos();
+  
+  </script>
+</body>
+
 </html>

@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8"/>
     <title>Escuela primaria 15 de mayo</title>
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/school.ico" />
     <link rel="stylesheet" href="assets/css/mi_hoja_de_estilos.css" type="text/css" />
@@ -34,7 +35,7 @@
                     <input type="text" placeholder="Escribe tu Usuario" name="username" id="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="contraseña"><b>Contrasena</b></label>
+                    <label for="contraseña"><b>Contraseña</b></label>
                     <input type="password" placeholder="Escribe tu contrasena" name="password" id="password" required>
                 </div>
                 <div class="form-group">
@@ -42,7 +43,7 @@
 
                     </p>
                 </div>
-                <button type="submit" name="iniciar" id="iniciar">Iniciar Sesion</button>
+                <button onclick="handleLoginForm()" name="iniciar" id="iniciar">Iniciar Sesion</button>
                 <label>
                 </label>
             </div>
@@ -53,81 +54,14 @@
             </div>
         </form>
     </div>
-    <script>
-
-        /*
-        * Login de Usuario 
-        */
-
-        var form = document.getElementById("loginForm");
-        form.addEventListener('submit', handleLoginFormSubmit);
-
-        function handleLoginFormSubmit(event) {
-            event.preventDefault();
-
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            let loginForm = new FormData(document.getElementById("loginForm"));
-
-            fetch('./backend/login.php', {
-                method: 'POST',
-                body: loginForm
-            })
-                .then(function (response) {
-                    return response.text();
-                })
-                .then(function (data) {
-                    console.log(data);
-                    var response = JSON.parse(data);
-
-                    if (response.statusCode === 200) {
-                        document.getElementById("loginResult").innerHTML = response.msj + " tipo_usuario: " + response.puesto;
-
-                        // codigo para redireccionar,
-
-                        if (response.tipo_usuario == 'Administrador') {
-                            location.replace("./admin.html");
-                        }
-                    } else if (response.statusCode === 403) {
-                        document.getElementById("loginResult").innerHTML = response.msj;
-                    }
-                });
-        }
-
-        /*
-        * Todo lo referente a la UI
-        * Se mete todo en una sola funcion y se corre
-        */
-        function userInterfaseInit() {
-
-            function redireccionalpadrefamilia() {
-                location.replace("./menu.html");
-            }
-
-            // crear el modal
-            var modal = document.getElementById('id01');
-
-            // se cierra si se hace click fuera de la ventana
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        }
-
-
-        // Inicializar las funciones aqui despues del codigo
-        userInterfaseInit();
-    </script>
-    <script>
-        function redireccionalpadrefamilia() {
-            location.replace("./menu.html");
-        }
-    </script>
+   
+    <script type="text/javascript" src="./assets/js/login.js"></script>
 </body>
 <div id="footer">
-    <footer>Francisco Daniel Pinon Reza PW1 &nbsp &nbsp </footer>
+    <footer>Francisco Daniel Piñón Reza PW1 &nbsp &nbsp </footer>
 </div>
 
 </html>
+
+
+ 

@@ -1,5 +1,7 @@
+
 <html>
     <head>
+      <meta charset="UTF-8"/>
         <title>Escuela primaria 15 de mayo</title>
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/school.ico" />
         <link rel="stylesheet" href="assets/css/menu.css" type="text/css" />
@@ -19,7 +21,7 @@
       
         <!-- Contenido -->
         <div class="overlay-content">
-          <a href="index.html">Pagina Principal</a>
+          <a href="index.html">Página Principal</a>
           <a href="quienessomos.html">Quienes Somos</a>
           <a href="servicios.html">Servicios</a>
           <a href="Solicitudes.html">Inscripciones</a>
@@ -44,7 +46,13 @@
           document.getElementById("myNav").style.width = "0%";
         }</script>
 
-  <div id="footer">
-    <footer>Francisco Daniel Pinon Reza PW1 &nbsp  &nbsp  </footer>
+  <div >
+    <footer>
+      Nombre del Estudiante: <% response.write("Francisco Daniel Piñon Reza") %> <br>
+      Numero de Control: <% response.write("ES1921010926") %> <br>
+      Materia: <% response.write("Programacion Web 1") %> <br>
+      La fecha del día de hoy es: <%response.write(date())%> <br>
+      La hora local del servidor es: <%response.write(time())%>.
+      </footer>
   </div>
 </html>

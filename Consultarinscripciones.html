@@ -1,6 +1,7 @@
 <html>
 
 <head>
+  <meta charset="UTF-8"/>
   <title>Escuela primaria 15 de mayo</title>
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/school.ico" />
   <link rel="stylesheet" href="assets/css/menu.css" type="text/css" />
@@ -33,9 +34,10 @@
   <div class="menu">
     <span class="menu" onclick="openNav()">Menu</span>
   </div>
-
+  <div class="centrardiv">
+    <button style="font-size: 200%;"  type="button" onclick="document.getElementById('modalCrear').style.display='block'">Crear inscripción</button>
+  </div>
   <h1>Consultar Inscripciones</h1>
-
   <div id="tabla_alumnos"></div>
 
 
@@ -50,9 +52,68 @@
   }</script>
 
 <div id="footer">
-  <footer>Francisco Daniel Pinon Reza PW1 &nbsp &nbsp </footer>
+  <footer>Francisco Daniel Piñón Reza PW1 &nbsp &nbsp </footer>
 </div>
 
+<div id="modalCrear" class="modal">
+  <form class="modal-content animate" id="inscripcionForm">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modalCrear').style.display='none'" class="close"
+        title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container">
+      <div class="form-group">
+        <input type="hidden" placeholder="" name="idalumnos" id="addidalumnos" required>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Nombre</b></label><br>
+        <input type="text" minlength="3" maxlength="50" placeholder="" name="nombre" id="addnombre" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Apellido Paterno</b></label><br>
+        <input type="text" minlength="3" maxlength="50" placeholder="" name="apellido_paterno" id="addapellido_paterno" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Apellido Materno</b></label><br>
+        <input type="text" minlength="3" maxlength="50" placeholder="" name="apellido_materno" id="addapellido_materno" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>CURP</b></label><br>
+        <input type="text" maxlength="18" placeholder="" name="curp" id="addcurp" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Fecha Nacimiento</b></label><br>
+        <input type="date" placeholder="" name="fecha_nacimiento" id="addfecha_nacimiento" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Estado</b></label><br>
+        <input type="text" placeholder="" name="estado" id="addestado" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Grado solicitado</b></label><br>
+        <input type="number" min="1" max="6" placeholder="" name="grado" id="addgrado" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Teléfono</b></label><br>
+        <input type="tel" maxlength="10" placeholder="" name="telefono" id="addtelefono" required><br>
+      </div>
+      <div class="form-group">
+        <label for="contraseña"><b>Correo electrónico</b></label><br>
+        <input type="email" placeholder="" name="email" id="addemail" required><br>
+      </div>
+
+      <button type="submit">Guardar</button>
+      <label>
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('modalCrear').style.display='none'"
+        class="cancelbtn">Cancelar</button>
+    </div>
+  </form>
+</div>
 
 <div id="modalEditar" class="modal">
   <form class="modal-content animate" id="editModalForm">
@@ -94,11 +155,11 @@
         <input type="number" min="1" max="6" placeholder="" name="grado" id="grado" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Telefono</b></label><br>
+        <label for="contraseña"><b>Teléfono</b></label><br>
         <input type="tel" placeholder="" name="telefono" id="telefono" required><br>
       </div>
       <div class="form-group">
-        <label for="contraseña"><b>Correo electronico</b></label><br>
+        <label for="contraseña"><b>Correo electrónico</b></label><br>
         <input type="email" placeholder="" name="email" id="email" required><br>
       </div>
 
@@ -264,6 +325,7 @@
             deleteById(e.target.name);
           })
         }
+        
 
         const editBtns = document.getElementsByClassName('btnEdit');
 
@@ -425,6 +487,68 @@
   }
 
   cargarTodos();
+</script>
+
+
+
+
+<script>
+ var form = document.getElementById("inscripcionForm");
+    form.addEventListener('submit', handleEditForm);
+  
+    function handleEditForm(event) {
+      event.preventDefault();
+  
+      let inscripcionForm = new FormData(document.getElementById("inscripcionForm"));
+  
+      fetch('./backend/addStudentInscritosById.php', {
+        method: 'POST',
+        body: inscripcionForm
+      })
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (respuesta) {
+          console.log(respuesta);
+         
+        
+        
+          if(respuesta === "El candidato sobrepasa la edad"){
+          console.log(respuesta);
+          alert("El candidato sobrepasa la edad");
+         }
+         else
+         {
+          if(respuesta === "El candidato no tiene la edad suficiente"){
+          console.log(respuesta);
+          alert("El candidato no tiene la edad suficiente");
+         }
+         else
+         {
+          if(respuesta === 'el año de inscripcion es no valido'){
+          alert("El grado de registro no es valido");
+         }
+         else{
+          if(respuesta === 'Registro Duplicado'){
+            alert("El alumno ya existe");
+          }
+          else{
+            if (respuesta === 'Registro insertado') {
+            alert("Registro insertado");
+            window.location.reload();
+          } else {
+            alert("Error al insertar el registro");
+          }
+          }  
+         }   
+         }
+         
+         }
+        
+        
+        });
+    }
+  
 </script>
 
 </html>
